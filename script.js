@@ -55,7 +55,7 @@ const delay = (ms) => {
 const minutesTimer = () => {
   return new Promise((res) => {
     firstTimer = setInterval(() => {
-      if (minutes === 1 && seconds >= 2) {
+      if (minutes === 19 && seconds >= 59) {
         clearInterval(firstTimer);
         minutes = 0;
         seconds = 0;
@@ -71,7 +71,7 @@ const minutesTimer = () => {
         seconds++;
         $timer.innerHTML = formatTime(minutes, seconds);
       }
-    }, 250);
+    }, 1000);
   });
 };
 
