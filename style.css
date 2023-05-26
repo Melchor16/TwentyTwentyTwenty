@@ -13,6 +13,7 @@ main {
 }
 
 .box {
+  position: relative;
   width: 60rem;
   height: 30rem;
   background: rgb(46, 146, 199);
@@ -68,16 +69,26 @@ main {
   letter-spacing: 0.5rem;
 }
 
-.start-btn {
-  margin-top: 5rem;
+.loading img {
+  position: absolute;
+  left: 43%;
+  bottom: 20%;
+  height: 7rem;
+}
+
+.btn {
+  margin-top: 5.5rem;
   width: 20rem;
   height: 4rem;
   border-style: none;
-  background-color: #023e8a;
-  color: #90e0ef;
   font-size: 2rem;
   letter-spacing: 0.3rem;
   border-radius: 1rem;
+}
+
+.start-btn {
+  background-color: #023e8a;
+  color: #90e0ef;
 }
 
 .start-btn:hover {
@@ -86,18 +97,15 @@ main {
 }
 
 .stop-btn {
-  margin-top: 5rem;
-  width: 20rem;
-  height: 4rem;
-  border-style: none;
   background-color: #90e0ef;
   color: #023e8a;
-  font-size: 2rem;
-  letter-spacing: 0.3rem;
-  border-radius: 1rem;
 }
 
 .stop-btn:hover {
   background-color: #5ad8ee;
   cursor: pointer;
+}
+
+.hidden {
+  visibility: hidden;
 }

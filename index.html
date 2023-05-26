@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TwentyTwentyTwenty</title>
     <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="./media/favicon.ico" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,7 +35,10 @@
         <div class="timer-box" id="timer-box">
           <p class="timer" id="timer">00:00</p>
         </div>
-        <button class="start-btn" id="start-stop-btn">Start</button>
+        <div class="loading hidden" id="loading">
+          <img src="./media/Spinner-0.9s-254px.svg" alt="Cargando..." />
+        </div>
+        <button class="btn start-btn" id="start-stop-btn">Start</button>
       </div>
     </main>
   </body>

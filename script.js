@@ -1,5 +1,5 @@
 const d = document;
-const twAudio = new Audio("./media/20-sound.mp3"),
+const mediaFolder = "./media/",
   alarmAudio = new Audio("./media/alarm-sound.mp3");
 
 let continueTimer = false,
@@ -9,7 +9,27 @@ let continueTimer = false,
   secondTimer;
 
 const $timer = d.getElementById("timer"),
-  $btn = d.getElementById("start-stop-btn");
+  $btn = d.getElementById("start-stop-btn"),
+  $loading = d.getElementById("loading");
+
+//------------------RANDOM AUDIO-------------------------//
+
+let twAudio;
+const audioArray = [
+  "20-sound-1.mp3",
+  "20-sound-2.mp3",
+  "20-sound-3.mp3",
+  "20-sound-4.mp3",
+  "20-sound-5.mp3",
+  "20-sound-6.mp3",
+];
+
+const randomAudio = (vol) => {
+  const audioIndex = Math.floor(Math.random() * audioArray.length);
+  twAudio = new Audio(`${mediaFolder}${audioArray[audioIndex]}`);
+  twAudio.volume = vol;
+  twAudio.play();
+};
 
 //------------------FORMATTING TIME OUTPUT---------------//
 
@@ -35,13 +55,13 @@ const delay = (ms) => {
 const minutesTimer = () => {
   return new Promise((res) => {
     firstTimer = setInterval(() => {
-      if (minutes === 19 && seconds >= 59) {
+      if (minutes === 1 && seconds >= 2) {
         clearInterval(firstTimer);
         minutes = 0;
         seconds = 0;
         $timer.innerHTML = formatTime(minutes, seconds);
         alarmAudio.play();
-        twAudio.play();
+        randomAudio(0.5);
         res(true);
       } else if (seconds >= 59) {
         minutes++;
@@ -51,7 +71,7 @@ const minutesTimer = () => {
         seconds++;
         $timer.innerHTML = formatTime(minutes, seconds);
       }
-    }, 1000);
+    }, 250);
   });
 };
 
@@ -63,6 +83,7 @@ const secTimer = () => {
         $timer.innerHTML = formatTime(minutes, seconds);
         twAudio.pause();
         alarmAudio.play();
+        twAudio.currentTime = 0;
         clearInterval(secondTimer);
         startTimer();
       } else {
@@ -90,6 +111,8 @@ const stopTimer = () => {
   $btn.removeEventListener("click", stopTimer);
   $btn.addEventListener("click", startTimer);
   continueTimer = false;
+  twAudio.pause();
+  twAudio.currentTime = 0;
 };
 
 const startTimer = async () => {
@@ -101,10 +124,12 @@ const startTimer = async () => {
   $btn.classList.add("stop-btn");
   $btn.innerHTML = "Stop";
 
+  $loading.classList.toggle("hidden");
+  await delay(1000);
+  $loading.classList.toggle("hidden");
   await minutesTimer();
   await delay(1500);
   await secTimer();
-  await delay(1500);
 };
 
 $btn.addEventListener("click", startTimer);
